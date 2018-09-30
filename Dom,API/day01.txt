@@ -1,0 +1,307 @@
+HTML5
+	在2004年，由一些著名的组织和个人构成了一个标准化机构，成为Web超文本应用技术工作组(Web Hypertext Application Technology Working Group WHATWG) 网址为www.whatwg.org，该组织的目标是产生一个HTML的新版本（可能由于XHTML难理解，或者是对Web标准执行慢而感到挫折，或者想创新），他们希望这个版本能为Web应用程序创建一个新的，丰富的，基于HTML的语言。由于一些新规范（canvas等）已经出现在一些浏览器(safari firefox)中，因此在2008年，这个机构努力的结果被W3C认可，并制定了草案。目前很多浏览器厂商和市场都开始承认HTML5,并且Google在很多地方都使用了HTML5，说明它的未来是光明的。
+
+	HTML5规范不仅支持先前HTML和XHTML的语法，而且增加了新的功能，虽然与HTML4相比HTML5是一种进步，但它同样也是一个妥协，HTML5的设计者明白一个现实，就是大多数WEB开发人员因为没有经过正规的技术训练，虽然要求他们写出规范的标记代码是徒劳的。
+
+	虽然对Web文档制作者而言，关于遵循HTML5浏览器语法分析器的应用讨论无法让他们产生兴趣，但是现在浏览器开发人员拥有一个共同的规范借以遵循，用于确定浏览器在遇到标签不嵌套，没有结束标记或者以不同的方式混杂时应该如何处理，这种功能是HTML5规范期望产生最好的结果的部分，是因为让浏览器供应商在处理标记问题上达成持久的共识比定义一些严格的语法然后让世界各地的web制作者都来比那些好的标记更能促进Web的发展。 力求使标记编写更有秩序只是H5规范的宏伟目标中的一个，它还期望以向后兼容的方式取代传统的HTML,XHTML,DOM规范。在这一目标的驱使下，当H5规范扩展时，它不仅会说明有哪些元素，并且会阐明如何在HTMLL中一个在脚本程序中使用这种元素。
+
+	HTML5要解决的三个问题
+		1. Web浏览器之间的兼容性很低
+			H5的使命是详细分析各Web浏览器所具有的功能，然后以此为基础，要求这些浏览器所有内部功能都要符合一个通用标准。如果各浏览器都符合通用标准，然后以该标准为基础书写程序，那么程序在各个浏览器都能正常运行的可能性就大大提高。
+
+		2. 文档结构不够明确
+			div
+
+			H5中添加了很多跟结构相关的元素，例如header,footer,section,article
+
+		3. Web应用程序功能受到限制
+			H5提供了各种各样Web应用上的新API，各个浏览器也在快速地封装着这些API。H5已经使富Web应用的实现变成了可能。
+
+1. 第一个HTML文档
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+	    <meta charset="UTF-8">
+	    <title>Html5文档</title>
+	    <script src=""></script>
+	    <style>
+
+	    </style>
+	</head>
+	<body>
+
+	</body>
+	</html>
+	1) HTML5特点
+		1. 内容类型 ContentType
+			H5的文件扩展符与内容类型保持不变。扩展符为.html或.htm;内容类型为text/html
+		2. DOCTYPE
+			<!DOCTYPE>与之前的HTML4有很大区别，原因是HTML5并不是定义为SGML或者XML的应用程序，在HTML5中不存在有效性检查，取而代之的是根据规范来了检查规范的一致性（让浏览器按照它们应该的方式来运行）。HTML4.01中的doctype需要对DTD进行引用，因为HTML4.01基于SGML。
+
+			HTML的语法是基于SGML(Standard Generalized Markup Language)标准通用标记语言的基础上建立起来的。由于SGML语法非常复杂，很多浏览器都不包含SGML的分析器，因此虽然HTML基本上遵从SGML语法，但是对于HTML的执行在各浏览器之间并没有统一的标准，所以浏览器本身是存在缺陷的。为了保证兼容性，H5围绕着Web标准重新定义了一套在现有HTML的基础上修改而来的语法，使它在各浏览器运行时都能符合这个标准。
+
+		3. 指定字符编码
+			H4中
+				<meta http-equiv="Content-type" content="text/html;charset=UTF-8"
+			H5中：
+				<meta charset="UTF-8">
+			两种方法均有效
+
+		4. 确保了与之前HTML版本的兼容性
+
+2. 新增的主体结构元素
+	1) article元素
+		article元素代表文档，页面或应用程序中独立的，完整的，可以独自被外部引用的内容，可以是一篇博客或者报刊中的文章，一篇论坛帖子，一段用户评论或者独立的插件，或其他任和独立的内容。
+		<article>
+			<header>
+				<h1>苹果</h1>
+				<p>发布日期：<time pubdate="pubdate">2010/10/09</time></p>
+			</header>
+			<p><b>苹果</b>植物类水果，多次花果.....</p>
+			<footer>
+				<p><small>著作版权</small></p>
+			</footer>
+		</article>
+
+	2) section	
+		用于对网站或应用程序中页面上的内容进行分块。一个section元素通常由内容及标题组成，但section并非是一个普通的容器元素，一个容器需要被直接定义样式或通过脚本定义行为时，推荐使用div。我们可以这样理解，section中的内容可以单独存储到数据库中或输入到word文档中。通常不推荐为那些没有标题的内容使用section元素。
+
+		section元素的作用是对页面上的内容进行分块，或者对文章进行分段。不要与article元素混淆。article元素可以看做是一种特殊种类的section元素，比section元素更强调独立性。
+
+		section元素的禁忌
+			1. 不要将section元素用作设置样式的页面容器，那是div元素的工作。
+			2. 如果article,aside,nav元素更符合使用条件，不要使用section
+			3. 不要为没有标题的内容区块使用section元素。
+
+			<article>
+				<h1>WebUI课程</h1>
+				<p>WebUI致力于前端开发</p>
+				<section>
+					<h2>HTML</h2>
+					<p>用于页面结构</p>
+				</section>
+				<section>
+					<h2>CSS</h2>
+					<p>用于页面样式</p>
+				</section>
+			</article>
+	3) nav元素
+		nav元素是一个可以用作页面导航的链接组，其中导航元素链接到其他页面或当前页面的其他部分。
+		nav使用的场合：
+			传统导航条	
+			侧边栏导航
+			页内导航
+			翻页操作
+	4) aside元素
+		aside元素用来表示当前页面或文章的附属信息部分，它可以包含当前页面或主要内容相关的引用，侧边栏，广告，导航条，以及其他类型的有别于主要内容的部分。
+		aside元素主要有以下两种使用方法：
+			1)被包含在article元素中作为主要内容的附属信息部分，其中的内容可以是与当前文章有关的参考资料，名词解释等。
+
+			2)在article元素之外使用，作为页面或站点全局的附属信息部分。典型的形式是侧边栏，其中的内容可以是友情链接，博客中其他
+		
+3. 新增的非主体结构元素
+	1) header元素
+		是一种具有引导和导航作用的结构元素，通常用来放置整个页面或页面内的一个内容区块的标题，但也可以包含其他内容，例如数据表格，搜索表单或相关的logo图片。一个网页内并未限制header元素的个数，可以拥有多个，可以为每个内容区块加一个header元素。
+
+		在H5中，一个header元素通常包括至少一个heading元素（h1-h6），也可以包括hgroup,table,form,nav元素
+
+		重置css
+		<header>
+			<hgroup>
+				<h1>IT技术</h1>
+				<a href="#">退出</a>
+				<a href="#">[订阅]</a>
+				<a href="#">[手机订阅]</a>
+			</hgroup>
+			<nav>
+				<ul>
+					<li><a href="#">WebUI</a></li>
+					<li><a href="#">Java</a></li>
+					<li><a href="#">Android</a></li>
+					<li><a href="#">IOS</a></li>
+				</ul>
+			</nav>
+		</header>
+	2) hgroup
+		是将标题以及子标题进行分组的元素，hgroup元素通常会将h1~h6元素进行分组，譬如一个内容区块的标题以及其子标题算一组。
+			<hgroup>
+				<h1>IT技术</h1>
+				<a href="#">退出</a>
+				<a href="#">[订阅]</a>
+				<a href="#">[手机订阅]</a>
+			</hgroup>
+
+	3) footer
+		该元素可以作为其上层父级内容区块或是一个根区块的脚注。footer通常包括其相关区块的脚注信息，如作者，相关阅读连接以及版权信息等。与header类似，一个页面中也未限定footer元素的个数
+		<footer>
+			<ul>
+				<li>版权信息</li>
+				<li>站点地图</li>
+				<li>联系方式</li>
+			</ul>
+			<address>
+				电子邮箱....
+			</address>
+		</footer>
+	4) address
+		用来在文档中呈现联系信息，包括文档作者或文档维护者名字，他们的网站链接，电子邮箱，真实地址，电话号码，以及跟文档相关的联系人的所有联系信息。
+
+
+
+3. HTML5中表单元素
+	1) 新增表单元素的属性
+		1.表单内元素的form属性
+			在H5中，可以将表单内的从属元素书写在页面上的任何地方，然后为该元素指定一个form属性，属性值为该表单的id。
+			<form id="testForm">
+				<input type="text" name="a">
+				<input type="submit">
+			</form>
+			<textarea name="b" form="testForm"></textarea>
+
+		2. formaction属性
+			在H5中，可以为所有的提交按钮，诸如<input type="submit"> <input type="image"> <button type="submit">等增加不同的formaction属性，使单击不同的按钮时可以将表单提交到不同的页面。
+			<form>
+				<input type="submit" name="" formaction="a.action">
+				<input type="submit" name="" formaction="b.action">
+				<input type="submit" name="" formaction="c.action">
+			</form>
+		3. formmethod
+			在H5中，可以使用formmethod属性为每个form表单元素分别指定不同的提交方法
+			<form>
+				<input type="text" name="name">
+				<input type="submit" name="" formmethod="post">
+				<input type="submit" name="" formmethod="get">
+			</form>	
+
+		4. formenctype
+			在H5中，可以使用该属性对表单元素分别指定不同的编码方式
+			<form>
+				<input type="submit" formaction="a.action" formenctype="multipart/form-data">
+			</form>
+			application/x-www-form-urlencoded
+			multipart/form-data	不进行编码，使用包含文件上传控件表单时，必须使用该值
+			text/plain 			表单数据中的空格被转换为"+"但不对表单数据特殊字符进行编码
+
+		5. formtarget属性
+			在H5中，可以对多个提交按钮分别使用formtarget属性来指定提交后在何处打开所需要加载的页面。
+				_blank		在新的浏览器窗口中打开
+				_self		默认值，当前窗口中打开
+				_parent		父框架中打开
+				_top		当前浏览器窗口中打开
+				framename	指定框架中打开
+
+		6. autofocus属性
+			为文本框选择框或按钮控件加上该属性，当画面打开时，该控件自动获得光标焦点。
+
+		7. required属性
+			在H5中，该元素可以应用在大多数元素上，在提交时，如果元素中内容为空白，则不允许提交，同时在浏览器中显示信息提示文字，提示用户必须输入内容。
+
+		8. control属性
+			在H5中，可以在标签（label元素）内部放置一个表单元素，并且通过该标签的control属性来访问该表单元素。
+
+		9. placaholder属性
+			是指当文本框<input type="text">或者<textarea>处于未输入状态时显示输入提示。
+
+		10.文本框的list属性
+			在H5中，可为单行文本框<input type="text">增加一个list属性，该属性值为某个datalist元素的id,datalist是H5中新增的元素，该元素类似于选择框，但是当用户想要设定的值不在选择列表之内时，允许自行输入。datalist元素本身并不显示，而是当文本框获取焦点时以提示输入的方式显示。
+			<input type="search" list="list1">
+		    <datalist id="list1">
+		        <option value="one">one</option>
+		        <option value="two">two</option>
+		        <option value="three">three</option>
+		    </datalist>
+
+
+		11.文本框的autocomplete属性
+			自动完成，该属性取值为"on"/"off"/"",当取值为on时，可以显式指定候补输入的数据列表。使用datalist元素与list属性提供候补输入的数据列表，在执行自动完成时，可以将该detalist元素中的数据作为候补输入的数据在文本框中自动显示。
+
+			自动完成允许浏览器预测对字段的输入。当用户在字段开始键入时，浏览器基于之前键入过的值，应该显示出在字段中填写的选项。     
+
+		13.文本框的pattern属性
+			将pattern属性值设为某个格式的正则表达式，在提交时会对这些进行检查，检查其内容是否符合给定格式。当输入的内容不符合给定格式时，则不允许提交，同时在浏览器中显示信息提示文字，提示输入的内容必须符合给定格式。
+
+		14.type属性
+			search	
+				与text文本框类似，但是用于搜索，在IOS操作系统的移动设备中，当search类型的元素获得焦点时，面板中"前往"按钮上的文字将变成"搜索"
+			tel 	
+				与text文本框类似，但是用于电话，在IOS操作系统的移动设备中，当tel类型的input元素获得焦点时，设备上将显示输入电话号码所使用的数字面板。
+			url 	
+				与text文本框类似，但是要求用户必须在其中输入url格式的内容
+			email 	
+				与text文本框类似，但是要求用户必须在其中输入email格式的内容
+				属性
+					multiple	允许该文本框输入一串以逗号分隔的email地址。
+			datatime-local,data,month,week,time 	
+				日期与时间输入文本框
+			number 	
+				数值输入文本框	
+				属性
+					min 	最小值
+					max 	最大值
+					step	步长，每次修改时增长的幅度
+			range	
+				只允许输入一段范围内数值的文本框，
+					min 	用于设定最小值
+					max		用于设定最大值。
+					step	每次拖动的步幅度
+			color	
+				颜色选择文本框
+	2) 新增表单元素
+		output元素
+			output元素定义不同类型的输出，比如计算结果或脚本的输出，output元素必须从属于某个表单。
+			通过js来实现输出
+	3) 表单验证
+		1 . 自动验证
+			<input type="text" required pattern=""/>
+		2 . 取消验证
+			1) form属性novalidate=true 可以关闭整个表单验证
+			2) input/submit属性formnovalidate 可以关闭单个元素表单验证
+		3 . 显式验证
+			form与input元素都具有一个checkValidity方法，调用该方法可以显式地对表单内所有元素内容或单个元素内容进行有效性验证。checkValidity方法将验证结果用boolean的形式返回。
+
+			var email = document.getElementById("email");
+			email.checkValidity()	//调用方法执行校验
+
+	3)增强的页面元素
+		1 . figure元素与figcaption元素
+			figure元素是一种元素的组合，带有可选标题，figure元素用来表示网页上一块独立内容，将其从网页上移除后不会对网页上的其他内容产生任何影响，figure元素所表示的内容可以是图片，统计图或代码示例，也可以是音频插件，视频插件，统计表格等。figcaption元素表示figure元素的标题，它从属于figure元素，必须书写在figure元素内部。一个figure元素内最多只允许放置一个figcaption元素，但是允许放置多个其他元素。
+
+			<figure>
+				<img src="" alt="">
+				<figcaption>标题</figcaption>
+			</figure>
+
+		2 . details元素与summary元素
+			details元素是一种用于标识该元素内部的子元素可以被展开,收缩显示的元素。该元素具有一个布尔类型的open属性，当该属性值为true时，该元素内部的子元素应该被展开显示；当该属性的值为false时，其内部的子元素应该被收缩起来不显示。默认值为false。details元素内并不仅限于放置文字，也可以放置表单,插件或对于一个统计图提供的详细数据表格。
+			
+			summary元素从属于details，用鼠标单击summary元素中的内容文字时，details元素中的其他所有从属元素将会展开或收缩。如果details元素内没有summary元素，浏览器会提供默认文字(详细信息)以供单击。
+
+		3 . mark元素
+			mark元素表示页面中需要突出显示或高亮显示的，对于当前用户具有参考作用的一段文字。通常在引用原文时使用mark元素，目的是引起读者的注意。mark元素对原文内容具有补充作用的一个元素。例如：对网页全文检索某个关键词时的检索结果；为了吸引读者注意，高亮显示
+				<mark>Html 5</mark>提供了一些新的元素和属性
+
+		4 . 新增的progress元素
+			progress元素答辩一个任务的完成进度，这个进度可以是不确定的，表示进度正在进行。但是不清楚还有多少工作量没有完成，也可用0到某个最大数字（100）之间的数字来表示准确的进度完成情况（比较进度百分比）
+				value	表示已经完成了多少工作量，0<value<=max
+				max		表示总共有多少工作量。
+		
+		5 . 新增的meter元素
+			meter元素表示规定范围内的数量值。例如：磁盘使用量，某个候选者的投票人数占总投票人数的比例等。
+				value	:在元素中特地表示出来的实际值
+				min		:指定规定范围时允许使用的最小值，默认为0
+				max		:指定规定范围时允许使用的最大值，默认为1
+				low		:规定范围的下限值，必须小于或等于high属性的值
+				high	:规定范围的上限值
+				optimum	:最佳值
+
+				<meter value="91" min="0" max="100" high="90" low="40" optimum="100"></meter>
+
+		6 . 改良的ol列表
+			在HTML5中，将ol列表进行改良，为它添加了start属性与reversed属性。
+				
+		
+
+		7. 重新定义的small元素
+			专门用来标识所谓的“小字印刷体”的元素，通常用在诸如免责声明，注意事项，法律规定，与版权相关等法律性声明文字中，同时不允许应用在页面主内容中，只允许被当做辅助信息以inline方式嵌入在页面中使用。同时，small元素不意味着元素中内容字号会变小，要将字号变小，需要配合CSS样式来实现。
+
+		

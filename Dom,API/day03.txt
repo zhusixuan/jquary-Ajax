@@ -1,0 +1,301 @@
+Canvas绘图
+学习目标：
+	掌握canvas元素的基本概念，学会如何在页面上放置一个canvas元素，如何使用canvas元素绘制出一个简单矩形
+	掌握使用路径的方法，能够利用路径绘制出圆形与多边形
+	掌握渐变图形的绘制方法，学会图形变形，图形缩放，图形组合，以及给图形绘制阴影的方法
+	掌握在Canvas画布中使用图像的方法，能够在画布中绘制图像，复制图像，平铺图像，裁剪图像，以及使用图像中的像素来进行图像处理的方法
+	掌握如何在画布中绘制文字，给文字加上边框的方法
+	掌握如何保持及恢复绘图状态，如何保存绘制出来的图形，图像，掌握在画布中制作简单动画的方法
+
+1. 介绍
+	canvas是H5中最受欢迎的功能，这个元素负责在页面中设定一个区域，然后就可以通过JS动态地在这个区域中绘制图形，canvas元素最早由苹果公司推出，当时主要用在Dashboard微件中，很快H5加入了这个元素，主要浏览器也迅速开始支持它。
+2. 基本用法
+	<canvas id="drawing" width="400" height="400">浏览器不支持canvas</canvas>
+	位于canvas开始标签和结束标签内部的内容是后备信息，如果浏览器不支持canvas，会显示这些内容
+		width	设定绘图区域的宽
+		height	设定绘图区域的高
+		toDataURL() 使用该方法可以导出在canvas元素上绘制的图像，这个方法接受一个参数，为图像的MIME类型格式，而且适用于创建图像的任何上下文。
+		
+	用canvas元素绘制图形时，需要经过几道步骤：
+	1) 取得canvas对象
+		通过document.getElementById()等方法取得canvas对象。
+	2) 取得上下文*(context)
+		图形上下文是一个封装了很多绘图功能的对象。参数只能为”2d“
+		var context = one.getContext("2d");
+	3) 填充与绘制边框
+		使用canvas元素绘制图形的时候，有两种方式：填充与绘制边框。填充是指填满图形内部；绘制边框是指不填充图形的内部，只绘制图形的边框。canvas元素结合使用者两种方式来绘制图形。
+	4) 设定绘图样式
+		在进行图形绘制的时候，首先要设定好绘图的样式，然后调用有关方法进行图形的绘制，所谓绘图的样式，主要是针对图形的颜色而言的。但不仅限于图形的颜色。
+			fillStyle 	填充的样式
+			strokeStyle 图形边框的样式
+	5) 指定线宽
+		使用图形上下文对象lineWidth属性设置图形边框的宽度。
+	6) 绘制矩形
+		分别使用fileRect方法与strokeReck方法来填充矩形和绘制矩形边框
+		context.fillRect(x,y,width,height);
+		context.strokeRect(x,y,width,height);
+
+
+	实例：
+		//获取canvas对象
+	    var basic = document.getElementById("basic");
+	    //获取2d绘图上下文
+	    var context = basic.getContext("2d");
+	    //设定填充颜色
+	    context.fillStyle = "#eeeccc";
+	    context.strokeStyle = "#ccceee";
+	    context.lineWidth = 2;
+	    //绘制- 填充
+	    context.fillRect(20,200,60,-100);
+	    context.fillRect(100,200,60,-140);
+	    context.fillRect(180,200,60,-80);
+	    context.fillRect(260,200,60,-140);
+	    //绘制- 绘制线条
+	    context.strokeRect(50,50,100,100);
+	
+3. 2D上下文
+	使用2D上下文提供的方法，可以绘制简单的2D图形，比如矩形，弧线和路径。2D上下文的坐标开始于canvas元素的左上角，原点坐标是(0,0)
+
+	1) 填充和描边
+		var context = drawing.getContext("2d");	//获取上下文
+		context.strokeStyle="red";	//填充
+		context.fillstyle = "#ccc";	//描边
+	2）绘制矩形
+		矩形是唯一一种可以直接在2D上下文中绘制的形状。
+		fillRect();		绘制矩形
+		strokeRect();	绘制矩形框
+		clearRect();	清除画布中的矩形框
+		这三个方法都能接受4个参数，矩形的x坐标，y坐标，宽度，高度，这些参数的单位都是像素
+
+		var context = drawing.getContext("2d");
+		//绘制红色矩形
+		context.fileStyle = "#ff0000";
+		context.fillRect(10,10,50,50);
+
+		//绘制半透明的蓝色矩形
+		context.fileStyle = "rgba(0,0,255,0.5)";
+		context.fileRect(30,30,50,50);
+
+		//绘制红色描边矩形
+		context.strokeStyle="red";
+		context.strokeRect(10,20,100,100);
+
+		//清除矩形
+		context.clearRect(20,20,50,50);
+
+	3) 绘制路径
+		1. 绘制圆形
+			1) 开始创建路径
+				context.beginPath();
+			2) 创建路径
+				context.arc(x,y,radius,startAngle,endAngle,counterclockwise)
+					x 			为绘制圆形的起点横坐标
+					y			为绘制圆形的起点纵坐标
+					radius 		表示弧线的半径
+					startAngle	起始角度
+					endAngle	结束角度
+					anticlockwise	是否按顺时针方向进行绘制，true为逆时针，false为顺时针。
+
+					在Canvas API中，绘制半径与弧时指定的参数为开始弧度与结束弧度
+					角度与弧度之间的转换：
+						var radians = degrees*Math.PI/180;
+
+						Math.PI 	表示的角度为180度
+						Math.PI*2	表示的角度为360度
+			3) 关闭路径
+				context.closePath();
+				将路径关闭后，路径的创建工作就完成了。但是要注意，此时还没有真正绘制任何图形。
+			4) 设定绘制样式，进行图形绘制
+				//context.fillStyle = "rgba(225,0,0,0.25)";
+
+				context.fill();		//填充图形
+				context.stroke();	//绘制图形边框
+			实例
+				var line = document.getElementById("line");
+	            var context2 = line.getContext("2d");
+	            context2.fillStyle = "#ddaadd";
+	            //context2.strokeStyle = "#ddaadd";
+	            context2.beginPath();
+	            context2.arc(100,100,50,Math.PI,Math.PI*2,true);
+	            //context2.fill();
+	            context2.stroke();
+
+	    2. 绘制直线
+	    	1) moveTo(x,y)
+	    		将光标移动到指定坐标点，绘制直线的时候以这个坐标点为起点。
+	    	2) lineTo(x,y)
+	    		表示直线的终点。 x,y为终点的坐标位置。
+	    	实例
+	    		var line = document.getElementById("line");
+	            var context3 = line.getContext("2d");
+	            context3.fillStyle = "#ddaadd";
+	            context3.moveTo(0,200);
+	            context3.lineTo(100,100);
+	            context2.closePath();
+	            context3.stroke();
+
+	4) 绘制渐变图形
+		之前我们使用过fillStyle方法在填充时指定填充的颜色，该方法除了指定颜色外，还可以用来指定填充的对象。 绘制渐变时需要使用LinearGradient对象，很容易通过2D上下文来创建和修改。要创建一个新的线性渐变，可以调用createLinearGradient()方法
+		1. 线性渐变
+			var gradient = createLinearGradient(xstart,ystart,xend,yend)
+				参数：
+					xstart 	渐变起点横坐标
+					ystart	渐变起点纵坐标
+					xend	渐变终点横坐标
+					yend	渐变终点纵坐标
+				返回值：
+					CanvasGradient实例
+			例如
+				var gradient = context.createLinearGradient(30,30,70,70);
+				gradient.addColorStop(0,white);
+				gradient.addColorStop(1,black);
+
+			gradient.addColorStop(offset,color);
+				参数：
+					offset 	为所设定的颜色离开渐变起点的偏移量，该参数的值是一个范围在0~1之间的浮点值，渐变起始点的偏移量为0，渐变的结束点的偏移量为1
+					color 	为绘制时使用的颜色
+				由于是渐变，所以至少需要使用两次addColorStop方法以追加两个颜色(开始颜色和结束颜色)
+
+			例如：
+				var gradient = context.createLinearGradient(200,200,200,0);
+	            gradient.addColorStop(0,'#fff');
+	            gradient.addColorStop(1,'#eeeccc');
+	            //设定填充颜色
+	            context.fillStyle = gradient;
+
+			function createRectLinearGradient(context,x,y,width,height){
+				return context.createLinearGradient(x,y,x+width,y+height);
+			}
+			这个函数基于起点x和y坐标以及宽高来创建渐变对象，从而让我们可以在fillRect()中使用相同的值
+		2. 径向渐变
+			径向渐变是指沿着圆形的半径方向向外进行扩展的渐变方式。
+			context.createRadialGradient(xstart,ystart,radiusStart,xend,yend,radiusend)
+			参数：
+				前三个参数：圆的原心(x,y)，以及半径
+				后三个参数：终点圆的原心(x,y)，以及半径
+			如果想从某个形状的中心点开始创建一个向外扩散的径向渐变的效果，就要将两个圆定义为同心圆。
+			restore
+	5) 绘制变形图形
+		1. 坐标变换
+			绘制图形的时候，我们可能经常会想要旋转图形，或者对图形进行变形处理，使用Canvas API的坐标轴变换处理功能，可以实现这种效果。
+			1. 平移
+				context.translate(x,y)
+					参数x为坐标原点向右移动的单位，参数y为坐标原点向下移动的单位
+			2. 扩大
+				context.scale(x,y)
+					参数x为水平方向的放大倍数，参数y为垂直方向放大的倍数，如果是缩小，将这两个参数设为0到1之间的数就可以了。
+			3. 旋转
+				rotate(angle)
+					angle是指旋转的角度，旋转的中心点是坐标轴的原点，旋转是以顺时针方向进行的，要想逆时针旋转时，将angle设定为负数即可。
+
+
+	6) 图形组合
+		context.globalCompositeOperation = type
+		一定要用在两个图之间的代码
+			//第一个图形
+			context.fillStyle="lightblue";
+	        context.fillRect(100,100,200,200);
+	        //设定组合方式
+	        context.globalCompositeOperation = "destination-out";
+	        //第二个图形
+	        context.fillStyle = "pink";
+	        context.beginPath();
+	        context.arc(150,150,100,0,Math.PI*2);
+	        context.closePath();
+	        context.fill();
+
+			type的值必须是下面几种字符串之一：
+			source-over	
+				默认值，表示新图形覆盖在原有图形之上
+			destination-over	
+				在原有图形之下绘制新图形
+			 source-in
+				新图形与原有图形作in运算，只显示新图形中与原有图形相重叠的部分，新图形与原有图形的其他部分均变为透明
+			 destination-in
+				新图形与原有图形作in运算，只显示原有图形中与新图形相重叠的部分，新图形与原有图形的其他部分均变为透明
+			source-out
+				新图形与原有图形作out运算，只显示新图形与原有图形不重叠的部分，新图形与原有图形的其他部分均变为透明
+			destination-out
+				新图形与原有图形作out运算，只显示原有图形与新图形不重叠的部分，新图形与原有图形的其他部分均变为透明
+			 source-atop
+				只绘制新图形与原有图形重叠的部分与未被重叠覆盖的原有图形，新图形的其他部分变为透明。
+			destination-atop
+				只绘制原有图形中被新图形重叠覆盖的部分与新图形的其他部分，原有图形中的其他部分变为透明，不绘制新图形中与原有图形相重叠的部分。
+			lighter
+				原有图形与新图形均绘制，重叠部分做加色处理。
+
+			xor	
+				只绘制新图形中与原有图形不重叠的部分，重叠部分变为透明。
+			copy
+				只绘制新图形，原有图形中未与新图形重叠的部分变为透明
+
+	7) 给图形绘制阴影
+		在H5中，使用Canvas元素可以给图形添加阴影效果，添加阴影效果时，只需利用图形上下文对象的几个关于阴影绘制的属性就可以了。
+			shadowOffsetX
+				阴影的横向位移量，默认为0
+			shadowOffsetY
+				阴影的纵向位移量，默认为0
+			shadowColor
+				阴影的颜色
+			shadowBlur
+				阴影的模糊范围，一般值设定在0到10之间。
+
+	8) 使用图像
+		1. 绘制图像
+			在HTML5中，不仅可以使用Canvas API绘制图形，还可以读取磁盘或网络中的图像文件，然后使用Canvas API将该图像绘制在画布中。
+			context.drawImage(image,x,y);
+				image为一个img元素，video元素或者一个JavaScript中的Image对象，代表实际对象来装载图像文件
+				x,y为绘制时图像在画布中的起始坐标。
+			context.drawImage(image,x,y,w,h);
+				w,h值绘制时的图像的宽度与高度。
+			context.drawImage(image,sx,sy,sw,sh,dx,dy,dw,dh);
+				可以用来将画布中已绘制好的图像的全部或者局部区域复制到画布中的另外一个位置上。
+				image为被复制的图像文件
+				sx,sy表示源图像的被复制区域在画布中的起始横坐标与起始纵坐标
+				sw,sy表示源图像被复制区域的宽度与高度
+				dx,dy表示复制后的目标图像在画布中的起始横坐标与起始纵坐标
+				dw,dh表示复制后的目标图像的宽度与高度
+
+			createPattern(image,type)
+				图像平铺
+				image参数为要平铺的图像
+				type的取值如下:
+					no-repeat	不平铺
+					repeat-x	横向平铺
+					repeat-y	纵向平铺
+					repeat 		全方向平铺
+				返回值为pattern对象，可以为fillStyle的值
+				var pattern = createPattern(image,'repeat');
+				context.fillStyle = pattern;
+				context,fillRect();
+
+		2. 使用图像数据
+			getImageData()
+			取得原始图像数据，
+				参数：
+					要取得其数据的画面区域的x和y坐标
+					该区域的像素宽度和高度
+				返回值：
+					ImageData的实例
+						width	
+						height
+						data 	
+							数组，保存着图像中每一个像素的数据。在data数组中，每个像素用4个元素来保存，分别表示红，绿，蓝，透明度值。
+			putImageData()
+				将图像数据绘制带画布上
+				参数：
+					ImageData的实例
+					x坐标和y坐标
+
+	9) 绘制文本
+		fillText()		
+			该方法可以使用fillStyle属性绘制文本
+		strokeText()	
+			该方法可以使用strokeStyle属性问文本描边
+			这两个方法都可以接受4个参数：要绘制的文本字符串，x坐标，y坐标，可选的最大像素宽度。这两个方法都以下列3个属性为基础
+			font			文本样式，大小，字体
+			textAlign		文本对齐方式 start,end,left,right,center
+			textBaseline	文本的基线，top,hanging,middle,alphabetic,ideographic,bottom
+	
+	
+	

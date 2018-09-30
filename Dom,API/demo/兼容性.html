@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script type="text/javascript" src="event.js"></script>
+	<script type="text/javascript">
+		window.onload=function(){
+			//1.获取元素
+			var div=document.getElementsByTagName("div")[0];
+
+			//2.绑定事件
+			myEvent.bind(div,"click",function(event){
+				var event=myEvent.getEvent(event);
+			});//dom  type   handler
+		}
+	</script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">	
+		#outer{
+			width: 300px;
+			height: 300px;
+		}
+		#center{
+			width: 200px;
+			height: 200px;
+		}
+		#inner{
+			width: 100px;
+			height: 100px;
+		}
+		div{
+			border:1px solid red;
+			margin: 20px auto
+		}
+
+		p{
+			width:100px;
+			height: 100px;
+			background-color: red
+		}
+</style>
+	<script type="text/javascript">
+		window.onload=function(){
+			var outer=document.getElementById("outer");
+			var center=document.getElementById("center");
+			var inner=document.getElementById("inner");
+
+
+		function handler(event){//1001
+			//console.log(event.bubbles);
+			alert(this.id);
+			event.stopPropagation();
+		}
+		outer.addEventListener("click",handler)
+		center.addEventListener("click",handler)
+		inner.addEventListener("click", handler)
+
+		var form=document.forms[0];
+		form.onsubmit=function(event){
+			var input=document.getElementsByTagName("input")[0];
+			var value=input.value;
+			if(!value){
+				alert("请输入你的姓名");
+				event.preventDefault();
+			}
+		}
+
+
+
+
+
+
+
+
+			/*inner.addEventListener("click", function(){
+				alert("inner222-------");
+			},true)*/
+
+			
+			
+			/*outer.removeEventListener("click", handler,true)*/
+
+
+
+
+
+
+			/*outer.onclick=function(){
+				alert(this.id);
+			}
+
+			outer.onclick=null;
+*/
+
+			/*center.onclick=function(){
+				alert(this.id);
+			}
+
+			inner.onclick=function(){
+				alert(this.id);
+			}*/
+
+
+
+
+
+
+
+		}
+		/*function handler(){
+				alert("hello");
+			}*/
+
+	</script>
+</head>
+<body>
+	<!-- <p onclick="handler()"></p>
+	<a href="javascript:void(alert('helo'))">百度一下</a> -->
+	<div id="outer">
+		<div id="center">
+			<div id="inner"></div>
+		</div>
+	</div>
+
+	<form action="1.html">
+		姓名： <input type="text" name="name1">
+		<br>
+		<button>提交</button>
+	</form>
+</body>
+</html>
